@@ -1,15 +1,16 @@
 function setup() {
+  // Create a drawing area (canvas) 400 pixels wide and 400 pixels tall
   createCanvas(400, 400);
-  // Draw the shapes only once in setup
+  // Draw the shapes only once in setup instead of repeatedly in draw
   draw();
   // Stop the animation loop (shapes drawn only once)
   noLoop();
 }
 
 function draw() {
-  background(220);
+  background(220); // Set the background color to a light gray
 
-  let shapes = []; // Array to store generated shapes
+  let shapes = []; // Array to store information about the generated shapes
 
   // Loop to create five non-overlapping shapes
   for (let i = 0; i < 5; i++) {
@@ -19,9 +20,9 @@ function draw() {
       stroke(random(255), random(255), random(255)); // Pick a random color for the outline
       fill(random(255), random(255), random(255), 100); // Pick a random color with transparency for fill
 
-      const numSides = int(random(3, 10));
-      const radius = random(50, 150);
-      const angle = TWO_PI / numSides;
+      const numSides = int(random(3, 10)); // Choose how many sides the shape will have (between 3 and 9)
+      const radius = random(50, 150); // Set the size of the shape
+      const angle = TWO_PI / numSides; // Calculate an angle based on the number of sides
 
       let doesOverlap = false; // Flag to check for overlap with existing shapes
 
@@ -40,7 +41,7 @@ function draw() {
           const theta = angle * j;
           const x = radius * cos(theta) + width / 2;
           const y = radius * sin(theta) + height / 2;
-          vertex(x, y);
+          vertex(x, y); // Add a corner (vertex) to the shape
         }
         endShape(CLOSE);
         shapes.push({ numSides, radius, x: width / 2, y: height / 2 }); // Store shape data
@@ -51,8 +52,8 @@ function draw() {
 
 // Function to check if a new shape overlaps with existing ones (explaination in comments)
 function isOverlapping(existingShape, newRadius, newNumSides, newX, newY) {
-  // Calculate minimum distance between shapes to avoid overlap with a buffer
-  const minDistance = existingShape.radius + newRadius + 10;
+  // Calculate minimum distance to avoid overlap with a buffer of 20 pixels
+  const minDistance = existingShape.radius + newRadius + 20;
 
   // Calculate center-to-center distance between shapes
   const distanceX = existingShape.x - newX;
