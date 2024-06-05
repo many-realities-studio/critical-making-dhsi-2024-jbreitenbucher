@@ -1,22 +1,22 @@
 function setup() {
-  // Create a drawing area (canvas) 400 pixels wide and 400 pixels tall
-  createCanvas(400, 400);
-  // Draw the shapes only once in setup instead of repeatedly in draw
+  createCanvas(1000, 1000);
+  // Draw the shapes only once in setup
   draw();
   // Stop the animation loop (shapes drawn only once)
   noLoop();
 }
 
 function draw() {
-  background(220); // Set the background color to a light gray
+  background(220);
 
-  let shapes = []; // Array to store information about the generated shapes
+  let shapes = []; // Array to store generated shapes
 
   // Loop to create five non-overlapping shapes
   for (let i = 0; i < 5; i++) {
+    let attempts = 0; // Counter to limit attempts for each shape
     let validShape = false; // Flag to check if a valid non-overlapping shape is generated
 
-    while (!validShape) { // Keep trying until a valid shape is found
+    while (!validShape && attempts < 100) { // Loop with maximum attempts to prevent infinite loop
       stroke(random(255), random(255), random(255)); // Pick a random color for the outline
       fill(random(255), random(255), random(255), 100); // Pick a random color with transparency for fill
 
@@ -45,7 +45,14 @@ function draw() {
         }
         endShape(CLOSE);
         shapes.push({ numSides, radius, x: width / 2, y: height / 2 }); // Store shape data
+      } else {
+        attempts++; // Increase attempt counter if overlap is found
       }
+    }
+
+    // Handle case where no valid shape is found after attempts
+    if (!validShape) {
+      console.warn(`Failed to create non-overlapping shape after ${attempts} attempts.`);
     }
   }
 }
