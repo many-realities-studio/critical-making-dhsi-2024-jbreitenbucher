@@ -33,4 +33,6 @@ function setup() {
   vertex(200, 300);
   vertex(100, 300);
   endShape(CLOSE);
+
+  biginShape()
 }
