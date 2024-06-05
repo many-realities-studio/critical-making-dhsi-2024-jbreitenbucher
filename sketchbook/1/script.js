@@ -1,84 +1,91 @@
-let originalPolygon; // Variable to store the original polygon
-let bouncingPolygon; // Variable to store the bouncing polygon
+// Define global variables for the original and duplicated polygons
+let originalPolygon = null;
+let duplicatePolygon = null;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight); // Create the canvas based on window size
-  originalPolygon = null; // Initialize originalPolygon to null
-  bouncingPolygon = null; // Initialize bouncingPolygon to null
+  // Create a canvas
+  createCanvas(400, 400);
 }
 
 function draw() {
-  background(220); // Set the background color
+  // Set background to white
+  background(255);
 
-  // If the originalPolygon exists, draw it
+  // If the original polygon exists, display it
   if (originalPolygon) {
-    fill(originalPolygon.fillColor); // Set the fill color of the original polygon
-    stroke(0); // Set the stroke color to black
-    strokeWeight(1); // Set the stroke weight to 1
-    beginShape(); // Begin drawing the shape
-    for (let i = 0; i < originalPolygon.sides; i++) { // Loop through each vertex of the polygon
-      let angle = map(i, 0, originalPolygon.sides, 0, TWO_PI); // Calculate the angle for each vertex
-      let radius = originalPolygon.radius; // Set the radius for the polygon
-      let x = originalPolygon.x + radius * cos(angle); // Calculate the x position of the vertex
-      let y = originalPolygon.y + radius * sin(angle); // Calculate the y position of the vertex
-      vertex(x, y); // Add the vertex to the shape
-    }
-    endShape(CLOSE); // Close the shape
+    originalPolygon.display();
   }
 
-  // If the bouncingPolygon exists, update its position and draw it
-  if (bouncingPolygon) {
-    bouncingPolygon.updatePosition(); // Update the position of the bouncing polygon
-    fill(bouncingPolygon.fillColor); // Set the fill color of the bouncing polygon
-    stroke(0); // Set the stroke color to black
-    strokeWeight(1); // Set the stroke weight to 1
-    beginShape(); // Begin drawing the shape
-    for (let i = 0; i < bouncingPolygon.sides; i++) { // Loop through each vertex of the polygon
-      let angle = map(i, 0, bouncingPolygon.sides, 0, TWO_PI); // Calculate the angle for each vertex
-      let radius = bouncingPolygon.radius; // Set the radius for the polygon
-      let x = bouncingPolygon.x + radius * cos(angle); // Calculate the x position of the vertex
-      let y = bouncingPolygon.y + radius * sin(angle); // Calculate the y position of the vertex
-      vertex(x, y); // Add the vertex to the shape
-    }
-    endShape(CLOSE); // Close the shape
+  // If the duplicate polygon exists, update and display it
+  if (duplicatePolygon) {
+    duplicatePolygon.update();
+    duplicatePolygon.display();
   }
 }
 
 function mousePressed() {
-  // Create a new polygon object with random properties at the mouse click position
-  originalPolygon = {
-    x: mouseX,
-    y: mouseY,
-    sides: Math.floor(Math.random() * 10) + 3, // Generate a random number of sides between 3 and 12
-    radius: 30, // Set the radius of the polygon
-    fillColor: color(Math.random() * 255, Math.random() * 255, Math.random() * 255), // Generate a random fill color
-  };
-
-  // Clone the original polygon to create the bouncing polygon
-  bouncingPolygon = { ...originalPolygon };
+  // Generate a random number of sides between 3 and 12
+  let sides = floor(random(3, 13));
+  // Generate a random color
+  let col = color(random(255), random(255), random(255));
+  // Create a new polygon at the mouse position with the random sides and color
+  originalPolygon = new Polygon(mouseX, mouseY, sides, col);
+  // Create the duplicate polygon
+  duplicatePolygon = new Polygon(mouseX + 10, mouseY, sides, col);
+  // Set the velocity for the duplicate polygon
+  duplicatePolygon.setVelocity(random(-2, 2), random(-2, 2));
 }
 
-// Function to update the position of the bouncing polygon
-Polygon.prototype.updatePosition = function () {
-  // Move the polygon based on its velocity
-  this.x += this.velocityX;
-  this.y += this.velocityY;
-
-  // Check for edge collisions and bounce if necessary
-  if (this.x - this.radius < 0) {
-    this.velocityX *= -1;
-    this.x = this.radius;
-  } else if (this.x + this.radius > width) {
-    this.velocityX *= -1;
-    this.x = width - this.radius;
+// Polygon class
+class Polygon {
+  constructor(x, y, sides, col) {
+    this.x = x;
+    this.y = y;
+    this.sides = sides;
+    this.radius = 50; // Set the radius of the polygon
+    this.col = col;
+    this.velocity = createVector(0, 0);
   }
 
-  if (this.y - this.radius < 0) {
-    this.velocityY *= -1;
-    this.y = this.radius;
-  } else if (this.y + this.radius > height) {
-    this.velocityY *= -1;
-    this.y = height - this.radius;
+  // Function to display the polygon
+  display() {
+    push();
+    fill(this.col);
+    stroke(0);
+    translate(this.x, this.y);
+    beginShape();
+    // Calculate the angle between each vertex
+    let angle = TWO_PI / this.sides;
+    for (let i = 0; i < this.sides; i++) {
+      let sx = cos(i * angle) * this.radius;
+      let sy = sin(i * angle) * this.radius;
+      vertex(sx, sy);
+    }
+    endShape(CLOSE);
+    pop();
   }
 
-// Check for
+  // Function to set the velocity of the polygon
+  setVelocity(x, y) {
+    this.velocity.set(x, y);
+  }
+
+  // Function to update the position of the polygon
+  update() {
+    this.x += this.velocity.x;
+    this.y += this.velocity.y;
+
+    // Check for collision with the edges of the canvas
+    if (this.x > width - this.radius || this.x < this.radius) {
+      this.velocity.x *= -1;
+    }
+    if (this.y > height - this.radius || this.y < this.radius) {
+      this.velocity.y *= -1;
+    }
+
+    // Check for proximity to the original polygon and adjust velocity if too close
+    if (originalPolygon && dist(this.x, this.y, originalPolygon.x, originalPolygon.y) < this.radius + 10) {
+      this.velocity.mult(-1);
+    }
+  }
+}
