@@ -1,11 +1,11 @@
 function setup() {
-  createCanvas(600, 600);
-  // Draw shapes initially
+  createCanvas(1000, 1000);
+  // Call draw initially to display shapes
   draw();
 }
 
 function draw() {
-  background(220);
+  background(220); // Clear the canvas before drawing new shapes
 
   let shapes = []; // Array to store generated shapes
 
@@ -18,8 +18,8 @@ function draw() {
       stroke(random(255), random(255), random(255)); // Pick a random color for the outline
       fill(random(255), random(255), random(255), 100); // Pick a random color with transparency for fill
 
-      const maxSize = min(width, height) * 0.6; // Maximum size of the shape (10% of canvas size)
-      const numSides = int(random(3, 30)); // Choose how many sides the shape will have (between 3 and 9)
+      const maxSize = min(width, height) * 0.1; // Maximum size of the shape (10% of canvas size)
+      const numSides = int(random(3, 10)); // Choose how many sides the shape will have (between 3 and 9)
       const radius = random(maxSize / 2); // Set the size of the shape (limited by maxSize)
       const angle = TWO_PI / numSides; // Calculate an angle based on the number of sides
 
@@ -66,8 +66,8 @@ function draw() {
     }
   }
 
-  // Schedule redraw after 20 seconds (20000 milliseconds)
-  setTimeout(draw, 20000);
+  // Schedule redraw after 10 seconds (10000 milliseconds)
+  setTimeout(draw, 10000);
 }
 
 // Function to check if a new shape overlaps with existing ones (explaination in comments)
@@ -81,5 +81,4 @@ function isOverlapping(existingShape, newRadius, newNumSides, newX, newY) {
   const centerDistance = sqrt(distanceX * distanceX + distanceY * distanceY);
 
   // Check if center-to-center distance is less than minimum distance to avoid overlap
-  return centerDistance < minDistance;
-}
+  return center
