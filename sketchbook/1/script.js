@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(600, 600);
   // Draw the shapes only once in setup
   draw();
   // Stop the animation loop (shapes drawn only once)
@@ -11,7 +11,7 @@ function draw() {
 
   let shapes = []; // Array to store generated shapes
 
-  // Loop to create five non-overlapping shapes
+  // Loop to create five non-overlapping shapes with different centers
   for (let i = 0; i < 5; i++) {
     let attempts = 0; // Counter to limit attempts for each shape
     let validShape = false; // Flag to check if a valid non-overlapping shape is generated
@@ -20,41 +20,45 @@ function draw() {
       stroke(random(255), random(255), random(255)); // Pick a random color for the outline
       fill(random(255), random(255), random(255), 100); // Pick a random color with transparency for fill
 
-      const maxSize = min(width, height) * 0.1; // Maximum size of the shape (10% of canvas size)
+      const maxSize = min(width, height) * 0.6; // Maximum size of the shape (10% of canvas size)
       const numSides = int(random(3, 10)); // Choose how many sides the shape will have (between 3 and 9)
       const radius = random(maxSize / 2); // Set the size of the shape (limited by maxSize)
       const angle = TWO_PI / numSides; // Calculate an angle based on the number of sides
 
       let doesOverlap = false; // Flag to check for overlap with existing shapes
       let fitsWithinCanvas = true; // Flag to check if shape fits within canvas
+      let centerValid = true; // Flag to check if center avoids existing shapes
 
-      // Check if shape fits within canvas boundaries
-      for (let j = 0; j < numSides; j++) {
-        const theta = angle * j;
-        const potentialX = radius * cos(theta) + width / 2;
-        const potentialY = radius * sin(theta) + height / 2;
+      // Generate random center within a reasonable area (not too close to edges)
+      const minCenterDistance = radius * 3 + 20; // Minimum distance between center and edges/existing shapes
+      let centerX = random(minCenterDistance, width - minCenterDistance);
+      let centerY = random(minCenterDistance, height - minCenterDistance);
 
-        // Check if potential vertex goes outside canvas
-        if (potentialX < 0 || potentialX > width || potentialY < 0 || potentialY > height) {
-          fitsWithinCanvas = false;
+      // Check if center overlaps existing shapes
+      for (const existingShape of shapes) {
+        const distanceX = existingShape.x - centerX;
+        const distanceY = existingShape.y - centerY;
+        const centerDistance = sqrt(distanceX * distanceX + distanceY * distanceY);
+        if (centerDistance < existingShape.radius + radius + 20) { // Buffer for overlap
+          centerValid = false;
           break;
         }
       }
 
-      // Continue checking only if shape doesn't overlap and fits within canvas
-      if (!doesOverlap && fitsWithinCanvas) {
+      // Continue checking only if shape doesn't overlap, fits canvas, and has valid center
+      if (!doesOverlap && fitsWithinCanvas && centerValid) {
         validShape = true;
         beginShape();
         for (let j = 0; j < numSides; j++) {
           const theta = angle * j;
-          const x = radius * cos(theta) + width / 2;
-          const y = radius * sin(theta) + height / 2;
+          const x = radius * cos(theta) + centerX;
+          const y = radius * sin(theta) + centerY;
           vertex(x, y); // Add a corner (vertex) to the shape
         }
         endShape(CLOSE);
-        shapes.push({ numSides, radius, x: width / 2, y: height / 2 }); // Store shape data
+        shapes.push({ numSides, radius, x: centerX, y: centerY }); // Store shape data
       } else {
-        attempts++; // Increase attempt counter if overlap or doesn't fit
+        attempts++; // Increase attempt counter if issues are found
       }
     }
 
