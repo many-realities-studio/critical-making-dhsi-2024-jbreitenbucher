@@ -26,16 +26,23 @@ function draw() {
       const angle = TWO_PI / numSides; // Calculate an angle based on the number of sides
 
       let doesOverlap = false; // Flag to check for overlap with existing shapes
+      let fitsWithinCanvas = true; // Flag to check if shape fits within canvas
 
-      // Check for overlap with previously generated shapes
-      for (const shape of shapes) {
-        if (isOverlapping(shape, radius, numSides, width / 2, height / 2)) {
-          doesOverlap = true;
-          break; // Exit the inner loop if overlap is found
+      // Check if shape fits within canvas boundaries
+      for (let j = 0; j < numSides; j++) {
+        const theta = angle * j;
+        const potentialX = radius * cos(theta) + width / 2;
+        const potentialY = radius * sin(theta) + height / 2;
+
+        // Check if potential vertex goes outside canvas
+        if (potentialX < 0 || potentialX > width || potentialY < 0 || potentialY > height) {
+          fitsWithinCanvas = false;
+          break;
         }
       }
 
-      if (!doesOverlap) { // If no overlap, create and store the shape
+      // Continue checking only if shape doesn't overlap and fits within canvas
+      if (!doesOverlap && fitsWithinCanvas) {
         validShape = true;
         beginShape();
         for (let j = 0; j < numSides; j++) {
@@ -47,7 +54,7 @@ function draw() {
         endShape(CLOSE);
         shapes.push({ numSides, radius, x: width / 2, y: height / 2 }); // Store shape data
       } else {
-        attempts++; // Increase attempt counter if overlap is found
+        attempts++; // Increase attempt counter if overlap or doesn't fit
       }
     }
 
