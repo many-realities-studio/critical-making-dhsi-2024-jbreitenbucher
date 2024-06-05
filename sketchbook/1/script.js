@@ -31,7 +31,7 @@ function mousePressed() {
   // Create a new polygon at the mouse position with the random sides and color
   originalPolygon = new Polygon(mouseX, mouseY, sides, col);
   // Create the duplicate polygon
-  duplicatePolygon = new Polygon(mouseX + 10, mouseY, sides, col);
+  duplicatePolygon = new Polygon(mouseX + 90, mouseY, sides, col);
   // Set the velocity for the duplicate polygon
   duplicatePolygon.setVelocity(random(-2, 2), random(-2, 2));
 }
