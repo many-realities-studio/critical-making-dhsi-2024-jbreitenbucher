@@ -20,8 +20,9 @@ function draw() {
       stroke(random(255), random(255), random(255)); // Pick a random color for the outline
       fill(random(255), random(255), random(255), 100); // Pick a random color with transparency for fill
 
+      const maxSize = min(width, height) * 0.1; // Maximum size of the shape (10% of canvas size)
       const numSides = int(random(3, 10)); // Choose how many sides the shape will have (between 3 and 9)
-      const radius = random(50, 150); // Set the size of the shape
+      const radius = random(maxSize / 2); // Set the size of the shape (limited by maxSize)
       const angle = TWO_PI / numSides; // Calculate an angle based on the number of sides
 
       let doesOverlap = false; // Flag to check for overlap with existing shapes
