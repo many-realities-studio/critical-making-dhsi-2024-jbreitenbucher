@@ -16,8 +16,9 @@ function draw() {
     let validShape = false; // Flag to check if a valid non-overlapping shape is generated
 
     while (!validShape) { // Keep trying until a valid shape is found
-      stroke(random(255), random(255), random(255));
-      fill(random(255), random(255), random(255), 100);
+      stroke(random(255), random(255), random(255)); // Pick a random color for the outline
+      fill(random(255), random(255), random(255), 100); // Pick a random color with transparency for fill
+      // ... rest of the code to create the polygon
 
       const numSides = int(random(3, 10));
       const radius = random(50, 150);
