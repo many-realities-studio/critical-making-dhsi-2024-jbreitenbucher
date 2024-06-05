@@ -33,10 +33,10 @@ function mousePressed() {
         const maxOffset = radius * 2; // Maximum offset from mouse position
         const offsetX = random(-maxOffset, maxOffset);
         const offsetY = random(-maxOffset, maxOffset);
-        const centerX = mouseX + offsetX;
+        const centerX = mouseX + offsetX; // Center of the shape with random offset
         const centerY = mouseY + offsetY;
 
-        // Check for overlap with previously generated shapes
+        // Check for overlap with previously generated shapes (function explained later)
         for (const existingShape of shapes) {
           if (isOverlapping(existingShape, radius, numSides, centerX, centerY)) {
             doesOverlap = true;
@@ -44,7 +44,7 @@ function mousePressed() {
           }
         }
 
-        // Continue checking only if shape doesn't overlap and fits within canvas
+        // Continue checking only if shape doesn't overlap and fits within canvas (implicitly checked by offset)
         if (!doesOverlap) {
           validShape = true;
           beginShape();
@@ -69,7 +69,7 @@ function mousePressed() {
   }
 }
 
-// Function to check if a new shape overlaps with existing ones (same as before)
+// Function to check if a new shape overlaps with existing ones (explaination in comments)
 function isOverlapping(existingShape, newRadius, newNumSides, newX, newY) {
   // Calculate minimum distance to avoid overlap with a buffer of 20 pixels
   const minDistance = existingShape.radius + newRadius + 20;
