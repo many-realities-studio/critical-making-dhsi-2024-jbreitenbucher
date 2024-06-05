@@ -1,9 +1,7 @@
 function setup() {
   createCanvas(600, 600);
-  // Draw the shapes only once in setup
+  // Draw shapes initially
   draw();
-  // Stop the animation loop (shapes drawn only once)
-  noLoop();
 }
 
 function draw() {
@@ -21,7 +19,7 @@ function draw() {
       fill(random(255), random(255), random(255), 100); // Pick a random color with transparency for fill
 
       const maxSize = min(width, height) * 0.6; // Maximum size of the shape (10% of canvas size)
-      const numSides = int(random(3, 10)); // Choose how many sides the shape will have (between 3 and 9)
+      const numSides = int(random(3, 30)); // Choose how many sides the shape will have (between 3 and 9)
       const radius = random(maxSize / 2); // Set the size of the shape (limited by maxSize)
       const angle = TWO_PI / numSides; // Calculate an angle based on the number of sides
 
@@ -67,6 +65,9 @@ function draw() {
       console.warn(`Failed to create non-overlapping shape after ${attempts} attempts.`);
     }
   }
+
+  // Schedule redraw after 20 seconds (20000 milliseconds)
+  setTimeout(draw, 20000);
 }
 
 // Function to check if a new shape overlaps with existing ones (explaination in comments)
