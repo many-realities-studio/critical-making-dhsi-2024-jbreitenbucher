@@ -1,7 +1,3 @@
-<div id="story"></div>
-<div id="p5-canvas"></div>
-
-<script>
 (function() {
     // Define Tracery grammar
     var grammar = {
@@ -75,4 +71,3 @@
 
     checkLibrariesLoaded();
 })();
-</script>
