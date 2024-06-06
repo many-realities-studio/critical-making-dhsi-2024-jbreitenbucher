@@ -37,27 +37,22 @@ function mouseClicked() {
 // See the tutorial here: http://www.crystalcodepalace.com/traceryTut.html
 var grammarSource = {
 	"origin": [
-		"#line1#\n#line2#\n#line3#"
+		"#fiveSyllable#\n#sevenSyllable#\n#fiveSyllable#"
 	],
-	"line1": [
-		"#adj# #noun# #verb#",
-		"#adj.a# #noun# #verb#",
-		"#verb# #prep# #noun#",
-		"#noun# #verb# #prep#"
-	],
-	"line2": [
-		"#noun# #verb# #prep# #adj# #noun#",
-		"#adj# #noun# #verb# #prep# #noun#",
-		"#verb# #prep# #adj# #noun#",
-		"#adj.a# #noun# #prep# #verb#",
-		"#verb# #prep# #adj# #noun#"
-	],
-	"line3": [
-		"#noun# #prep# #noun#",
-		"#verb# #prep# #noun#",
+	"fiveSyllable": [
 		"#adj# #noun# #verb#",
 		"#noun# #verb# #prep#",
-		"#verb# #prep# #adj# #noun#"
+		"#verb# #prep# #noun#",
+		"#adj# #noun# #prep#",
+		"#noun# #adj# #prep#",
+		"#verb# #adj# #noun#"
+	],
+	"sevenSyllable": [
+		"#noun# #verb# #prep# #adj# #noun#",
+		"#adj# #noun# #verb# #prep# #noun#",
+		"#verb# #prep# #adj# #noun# #prep#",
+		"#adj# #noun# #prep# #verb# #noun#",
+		"#noun# #verb# #adj# #noun# #prep#"
 	],
 	"noun": [
 		"owl",
