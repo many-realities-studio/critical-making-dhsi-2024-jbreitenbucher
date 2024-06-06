@@ -141,7 +141,7 @@ class Particle {
     noStroke();
 		textSize(this.size);
 		//Try any web safe font
-		textFont("Courier");
+		textFont("Helvetica");
 		//This centers the text on the click
 		textAlign(CENTER, CENTER);
 		//This sets the fill to a static color - can you make it random?
@@ -149,7 +149,7 @@ class Particle {
     //stroke(255);
 		//This keeps R and G values at 255 to allow for yellows
 		//Try changing it!
-    fill("green");
+    fill(random(50,255));
 		//This positions the text
     text(this.text, this.x, this.y);
   }
