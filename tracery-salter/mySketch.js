@@ -19,7 +19,7 @@ function draw() {
       particles.splice(i, 1);
     }
   }
-	background(50,50,50,50);
+	background(50,50,50,6);
 }
 
 //This draws the word with each mouse click
