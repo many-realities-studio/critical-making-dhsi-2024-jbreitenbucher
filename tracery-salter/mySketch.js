@@ -120,11 +120,11 @@ class Particle {
 		// This keeps the y at mouse position
 		this.y = y;
 		// This sets the range of x movement - try limiting it to + or -
-		this.vx = random(-3, 3);
+		this.vx = random(-2, 2);
 		// This sets the range of y movement - try limiting it to + or -
-		this.vy = random(-4, 4);
+		this.vy = random(-2, 2);
 		// This sets the text size to be consistent
-		this.size = random(12, 24);
+		this.size = random(18, 24);
 		// This sets the current line to the particle
 		this.text = text;
 	}
