@@ -4,7 +4,7 @@ let particles = [];
 let backgroundImage;
 
 function preload() {
-	backgroundImage = loadImage('path/to/your/image.jpg'); // Add the path to your background image here
+	backgroundImage = loadImage('gho.jpg'); // Add the path to your background image here
 }
 
 function setup() {
