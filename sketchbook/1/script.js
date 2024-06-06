@@ -24,7 +24,7 @@ function draw() {
 }
 
 function mousePressed() {
-  // Generate a random number of sides between 3 and 12
+  // Generate a random number of sides between 3 and 29
   let sides = floor(random(3, 30));
   // Generate a random color
   let col = color(random(255), random(255), random(255));
