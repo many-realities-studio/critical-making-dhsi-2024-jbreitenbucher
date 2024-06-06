@@ -36,61 +36,78 @@ function mouseClicked() {
 // http://tracery.io/ 
 // See the tutorial here: http://www.crystalcodepalace.com/traceryTut.html
 var grammarSource = {
-	"name": [
-		"Bertram",
-		"Arabella",
-		"Cecil",
-		"Fred"
-	],
 	"origin": [
-		"With politics these days, it's time to move out of #city#",
-		"Wow.",
-		"What, are you from #city#?"
+		"#line1#\n#line2#\n#line3#"
 	],
-	"city": [
-		"Tokyo",
-		"Jakarta",
-		"Delhi",
-		"Guangzhou",
-		"Mumbai",
-		"Manila",
-		"Shanghai",
-		"Seoul",
-		"Mexico City",
-		"Cairo",
-		"New York",
-		"Victoria",
-		"Fort Worth",
-		"Clemson",
-		"the South",
-		"the North",
-		"the East",
-		"the West",
-		"Dhaka",
-		"Beijing",
-		"Bangkok",
-		"Shenzhen",
-		"Moscow",
-		"Buenos Aires",
-		"Lagos",
-		"Istanbul",
-		"Karachi",
-		"Bangalore",
-		"Ho Chi Minh City",
-		"Osaka",
-		"Chengdu",
-		"Tehran",
-		"Kinshasa",
-		"Rio de Janeiro",
-		"Chennai",
-		"Lahore",
-		"Chongqing",
-		"Los Angeles",
-		"Baoding",
-		"London",
-		"Paris",
-		"Linyi",
-		"Dongguan"
+	"line1": [
+		"#adj# #noun# #verb#",
+		"#adj.a# #noun# #verb#",
+		"#verb# #prep# #noun#",
+		"#noun# #verb# #prep#"
+	],
+	"line2": [
+		"#noun# #verb# #prep# #adj# #noun#",
+		"#adj# #noun# #verb# #prep# #noun#",
+		"#verb# #prep# #adj# #noun#",
+		"#adj.a# #noun# #prep# #verb#",
+		"#verb# #prep# #adj# #noun#"
+	],
+	"line3": [
+		"#noun# #prep# #noun#",
+		"#verb# #prep# #noun#",
+		"#adj# #noun# #verb#",
+		"#noun# #verb# #prep#",
+		"#verb# #prep# #adj# #noun#"
+	],
+	"noun": [
+		"owl",
+		"tree",
+		"night",
+		"moon",
+		"mouse",
+		"feather",
+		"wing",
+		"forest",
+		"shadow",
+		"sky",
+		"hoot",
+		"prey"
+	],
+	"verb": [
+		"glides",
+		"swoops",
+		"hunts",
+		"hoots",
+		"seeks",
+		"flies",
+		"watches",
+		"soars",
+		"rests",
+		"perches"
+	],
+	"adj": [
+		"silent",
+		"wise",
+		"nocturnal",
+		"ancient",
+		"soft",
+		"swift",
+		"dark",
+		"mysterious",
+		"lonely",
+		"quiet"
+	],
+	"prep": [
+		"in",
+		"on",
+		"under",
+		"through",
+		"above",
+		"with",
+		"by",
+		"at",
+		"over",
+		"near"
 	]
 };
 
