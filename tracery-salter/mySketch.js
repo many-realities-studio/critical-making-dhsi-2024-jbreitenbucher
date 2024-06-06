@@ -144,7 +144,7 @@ class Particle {
     //stroke(255);
 		//This keeps R and G values at 255 to allow for yellows
 		//Try changing it!
-    fill(random(50,255));
+	  fill((random(50, 255), random(50, 255), random(50, 255)));
 		//This positions the text
     text(this.text, this.x, this.y);
   }
