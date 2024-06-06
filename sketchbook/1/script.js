@@ -42,7 +42,7 @@ class Polygon {
     this.x = x;
     this.y = y;
     this.sides = sides;
-    this.radius = 50; // Set the radius of the polygon
+    this.radius = random(10,50); // Set the radius of the polygon
     this.col = col;
     this.velocity = createVector(0, 0);
   }
