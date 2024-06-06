@@ -4,7 +4,7 @@ let duplicatePolygon = null;
 
 function setup() {
   // Create a canvas
-  createCanvas(400, 400);
+  createCanvas(600, 600);
 }
 
 function draw() {
@@ -25,7 +25,7 @@ function draw() {
 
 function mousePressed() {
   // Generate a random number of sides between 3 and 12
-  let sides = floor(random(3, 13));
+  let sides = floor(random(3, 30));
   // Generate a random color
   let col = color(random(255), random(255), random(255));
   // Create a new polygon at the mouse position with the random sides and color
