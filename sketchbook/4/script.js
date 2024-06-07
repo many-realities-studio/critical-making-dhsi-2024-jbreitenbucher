@@ -1,11 +1,12 @@
  p=this;
- //function setupP5(p){
-    p.setup = function() {
+(function () {
+  function setupP5(p) {
+    p.setup = function () {
       let canvas = p.createCanvas(400, 400);
-      //canvas.parent('p5-canvas-hall');
+      canvas.parent('p5-canvas-hall');
     }
 
-    p.draw = function() {
+    p.draw = function () {
       p.background(30);
       drawCandle();
     }
@@ -38,5 +39,6 @@
       p.fill(255, 200, 0, 200);
       p.ellipse(flameX, flameY, flameSize / 2, flameSize);
     }
- // }
- // new setupP5(setupP5);
+  }
+  new p5(setupP5);
+});
