@@ -1,42 +1,43 @@
 (function(){
   function setupP5(p){
     p.setup = function() {
-      createCanvas(400, 400);
+      let canvas = p.createCanvas(400, 400);
+      canvas.parent('p5-canvas-hall');
     }
 
-    function draw() {
-      background(30);
+    p.draw = function() {
+      p.background(30);
       drawCandle();
     }
 
     function drawCandle() {
       // Candle properties
-      let candleX = width / 2;
-      let candleY = height * 3 / 4;
+      let candleX = p.width / 2;
+      let candleY = p.height * 3 / 4;
       let candleWidth = 40;
       let candleHeight = 100;
 
       // Draw candle body
-      noStroke();
-      fill(200, 150, 100);
-      rect(candleX - candleWidth / 2, candleY - candleHeight, candleWidth, candleHeight);
+      p.noStroke();
+      p.fill(200, 150, 100);
+      p.rect(candleX - candleWidth / 2, candleY - candleHeight, candleWidth, candleHeight);
 
       // Draw wick
-      fill(0);
-      rect(candleX - 2, candleY - candleHeight - 10, 4, 10);
+      p.fill(0);
+      p.rect(candleX - 2, candleY - candleHeight - 10, 4, 10);
 
       // Draw flame
-      let flameX = candleX + random(-2, 2);
-      let flameY = candleY - candleHeight - 20 + random(-2, 2);
-      let flameSize = 30 + random(-5, 5);
+      let flameX = candleX + p.random(-2, 2);
+      let flameY = candleY - candleHeight - 20 + p.random(-2, 2);
+      let flameSize = 30 + p.random(-5, 5);
 
-      noStroke();
-      fill(255, 140, 0, 150);
-      ellipse(flameX, flameY, flameSize, flameSize * 2);
+      p.noStroke();
+      p.candleYfill(255, 140, 0, 150);
+      p.ellipse(flameX, flameY, flameSize, flameSize * 2);
 
-      fill(255, 200, 0, 200);
-      ellipse(flameX, flameY, flameSize / 2, flameSize);
+      p.fill(255, 200, 0, 200);
+      p.ellipse(flameX, flameY, flameSize / 2, flameSize);
     }
   }
-  
+  new setupP5(setupP5);
 })
