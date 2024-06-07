@@ -1,42 +1,47 @@
+(function () {
+  function setupP5(p) {
+    p.setup = function () {
+      let canvas = p.createCanvas(400, 400);
+      canvas.parent('p5-canvas-hall');
+    }
 
-  let angle = 0;
-  let angleSpeed = 0.05;
+    function draw() {
+      p.background(30);
+      drawCandle();
+    }
 
-  function setup() {
-    let canvas = createCanvas(400, 400);
-    //canvas.parent('p5-canvas');
-    angleMode(RADIANS);
+    function drawCandle() {
+      // Candle properties
+      let candleX = p.width / 2;
+      let candleY = p.height * 3 / 4;
+      let candleWidth = 40;
+      let candleHeight = 100;
+
+      // Draw candle body
+      p.noStroke();
+      p.fill(200, 150, 100);
+      p.rect(candleX - candleWidth / 2, candleY - candleHeight, candleWidth, candleHeight);
+
+      // Draw wick
+      p.fill(0);
+      p.rect(candleX - 2, candleY - candleHeight - 10, 4, 10);
+
+      // Draw flame
+      let flameX = candleX + p.random(-2, 2);
+      let flameY = candleY - candleHeight - 20 + p.random(-2, 2);
+      let flameSize = 30 + p.random(-5, 5);
+
+      p.noStroke();
+      p.fill(255, 140, 0, 150);
+      p.ellipse(flameX, flameY, flameSize, flameSize * 2);
+
+      p.fill(255, 200, 0, 200);
+      p.ellipse(flameX, flameY, flameSize / 2, flameSize);
+    }
+
+    return;
   }
 
-  function draw() {
-    background(30);
-    drawAxe();
-  }
+  new P5(setupP5);
 
-  function drawAxe() {
-    // Center point for swinging
-    let pivotX = width / 2;
-    let pivotY = height / 4;
-
-    // Calculate axe position based on angle
-    let axeLength = 200;
-    let axeX = pivotX + axeLength * sin(angle);
-    let axeY = pivotY + axeLength * cos(angle);
-
-    // Update angle for swinging motion
-    angle += angleSpeed;
-
-    // Draw axe handle
-    stroke(139, 69, 19); // brown color for handle
-    strokeWeight(10);
-    line(pivotX, pivotY, axeX, axeY);
-
-    // Draw axe blade
-    noStroke();
-    fill(150); // gray color for blade
-    push();
-    translate(axeX, axeY);
-    rotate(angle + PI / 2);
-    rect(-20, 0, 40, 60);
-    pop();
-  }
+})();
