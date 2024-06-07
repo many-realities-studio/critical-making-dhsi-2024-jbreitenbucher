@@ -28,12 +28,146 @@ tw-story[tags~="room"] {
 tw-passage[tags~="room"] {
   	background-color: black;
   	opacity: 75%;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="The Door" tags="" position="625,300" size="100,100">(enchant:?page,(bg:#a61e4d))You stand in front of a closed door. The door is a brilliant crimson with an imposing skull knocker. A note is taped to the door encouraging you to knock. What do you do? [[knock]] or [[leave]].</tw-passagedata><tw-passagedata pid="2" name="knock" tags="room" position="625,425" size="100,100">The door slowly swings open as candles spark to life. To your left you notice a [[hallway]]. Something falls off the [[bookshelf]] to the right of the room. Do you go down the [[hallway]] or investigate the [[bookshelf]]?</tw-passagedata><tw-passagedata pid="3" name="leave" tags="" position="825,300" size="100,100">(after:2s)[You return to your car and drive away as you notice the glowing eyes in the window.]</tw-passagedata><tw-passagedata pid="4" name="hallway" tags="" position="625,550" size="100,100">The hallway is dark compared to the [[entry room-&gt;knock]]. You notice a [[bust]] on a table that looks like it has something on it. Two doors further down the hall are reavealed only by the glint of light off of their handles. Do you investigate the [[bust]], the [[first door]], the [[second door]], or go back to the [[entry room-&gt;knock]]?</tw-passagedata><tw-passagedata pid="5" name="bookshelf" tags="" position="875,550" size="100,100">You notice some oddly conspicuous statues on the [[left-&gt;left statue]] and [[right-&gt;right statue]] of the bookshelf. Do you try to move the [[left statue]] or the [[right statue]]?</tw-passagedata><tw-passagedata pid="6" name="bust" tags="bust" position="475,675" size="100,100">The bust has blood on it. You drop the bust as you scream. After you recover, you notice a bloody print heading further down the hall. You cannot tell if it leads to the [[first door]] or the [[second door]]. Do you move further down the hall to open the [[first door]] or [[second door]] or go back to the [[entry room-&gt;knock]]?</tw-passagedata><tw-passagedata pid="7" name="first door" tags="" position="625,725" size="100,100">As you open the door, you catch a glimpse of a knife as it plunges into your chest.
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// Add Tracery library
+/*$(function () {
+  $.getScript("https://cdn.rawgit.com/v21/tracery/master/tracery.js",
+    function (data, textStatus, jqxhr) {
+      console.log('tracery file loaded');
+    }
+  );
+  $.getScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js",
+    function (data, textStatus, jqxhr) {
+      console.log('p5 file loaded');
+    }
+  );
+});*/
+    // Add Tracery library as a module
+var scriptTracery = document.createElement('script');
+scriptTracery.src = 'https://cdn.rawgit.com/v21/tracery/master/tracery.js';
+document.head.appendChild(scriptTracery);
+
+// Add p5.js library as a module
+var scriptP5 = document.createElement('script');
+scriptP5.src = 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js';
+document.head.appendChild(scriptP5);
+</script><tw-passagedata pid="1" name="The Door" tags="" position="625,300" size="100,100">(enchant:?page,(bg:#a61e4d))You stand in front of a closed door. The door is a brilliant crimson with an imposing skull knocker. A note is taped to the door encouraging you to knock. What do you do? [[knock]] or [[leave]].</tw-passagedata><tw-passagedata pid="2" name="knock" tags="room" position="625,425" size="100,100">The door slowly swings open as candles spark to life. To your left you notice a [[hallway]]. Something falls off the [[bookshelf]] to the right of the room. Do you go down the [[hallway]] or investigate the [[bookshelf]]?</tw-passagedata><tw-passagedata pid="3" name="leave" tags="" position="825,300" size="100,100">(after:2s)[You return to your car and drive away as you notice the glowing eyes in the window.]</tw-passagedata><tw-passagedata pid="4" name="hallway" tags="" position="625,550" size="100,100">&lt;div id=&quot;p5-canvas-hall&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+function setupP5(p) {
+    function setup() {
+        let canvas = p.createCanvas(400, 400);
+        canvas.parent(&#39;p5-canvas-hall&#39;);
+    }
+    
+    function draw() {
+        p.background(30);
+        drawCandle();
+    }
+    
+    function drawCandle() {
+        // Candle properties
+        let candleX = p.width / 2;
+        let candleY = p.height * 3 / 4;
+        let candleWidth = 40;
+        let candleHeight = 100;
+
+        // Draw candle body
+        p.noStroke();
+        p.fill(200, 150, 100);
+        p.rect(candleX - candleWidth / 2, candleY - candleHeight, candleWidth, candleHeight);
+
+        // Draw wick
+        p.fill(0);
+        p.rect(candleX - 2, candleY - candleHeight - 10, 4, 10);
+
+        // Draw flame
+        let flameX = candleX + p.random(-2, 2);
+        let flameY = candleY - candleHeight - 20 + p.random(-2, 2);
+        let flameSize = 30 + p.random(-5, 5);
+
+        p.noStroke();
+        p.fill(255, 140, 0, 150);
+        p.ellipse(flameX, flameY, flameSize, flameSize * 2);
+
+        p.fill(255, 200, 0, 200);
+        p.ellipse(flameX, flameY, flameSize / 2, flameSize);
+    }
+}
+&lt;/script&gt;
+The hallway is dark compared to the [[entry room-&gt;knock]]. You notice a [[bust]] on a table that looks like it has something on it. Two doors further down the hall are reavealed only by the glint of light off of their handles. Do you investigate the [[bust]], the [[first door]], the [[second door]], or go back to the [[entry room-&gt;knock]]?</tw-passagedata><tw-passagedata pid="5" name="bookshelf" tags="" position="875,550" size="100,100">You notice some oddly conspicuous statues on the [[left-&gt;left statue]] and [[right-&gt;right statue]] of the bookshelf. Do you try to move the [[left statue]] or the [[right statue]]?</tw-passagedata><tw-passagedata pid="6" name="bust" tags="bust" position="475,675" size="100,100">The bust has blood on it. You drop the bust as you scream. After you recover, you notice a bloody print heading further down the hall. You cannot tell if it leads to the [[first door]] or the [[second door]]. Do you move further down the hall to open the [[first door]] or [[second door]] or go back to the [[entry room-&gt;knock]]?</tw-passagedata><tw-passagedata pid="7" name="first door" tags="" position="625,725" size="100,100">As you open the door, you catch a glimpse of a knife as it plunges into your chest.
 
 (live: 5s)[(goto: &quot;Died&quot;)]</tw-passagedata><tw-passagedata pid="8" name="second door" tags="" position="750,675" size="100,100">The room is lit by candles. There is a [[door]] to your left and an odd looking [[alcove-&gt;first door]] to your right. You can hear a faint hum eminating from the [[door]]. Do you open the [[door]] or investigate the [[alcove-&gt;first door]]?</tw-passagedata><tw-passagedata pid="9" name="door" tags="" position="750,850" size="100,100">As you open the door and step through you plunge into darkness.
 
-(live: 5s)[(goto: &quot;Died&quot;)]</tw-passagedata><tw-passagedata pid="10" name="left statue" tags="" position="900,700" size="100,100">You never saw the blade as it took your head from your shoulders.
+(live: 5s)[(goto: &quot;Died&quot;)]</tw-passagedata><tw-passagedata pid="10" name="left statue" tags="" position="900,700" size="100,100">&lt;div id=&quot;story&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;p5-canvas&quot;&gt;&lt;/div&gt;
 
+&lt;script&gt;
+(function() {
+// Define Tracery grammar
+    var grammar = {
+    &quot;origin&quot;: [&quot;You #action# #location# as it took your head from your shoulders.&quot;],
+    &quot;action&quot;: [&quot;didn&#39;t see&quot;, &quot;caught a glimpse&quot;],
+    &quot;location&quot;: [&quot;the blade&quot;, &quot;the axe&quot;]
+	}
+
+    function generateStory() {
+        var traceryGrammar = tracery.createGrammar(grammar);
+        var story = traceryGrammar.flatten(&quot;#origin#&quot;);
+        return story;
+    }
+
+    document.getElementById(&#39;story&#39;).innerText = generateStory();
+
+    function setupP5(p) {
+        let angle = 0;
+        let angleSpeed = 0.05;
+
+        p.setup = function() {
+            let canvas = p.createCanvas(400, 400);
+            canvas.parent(&#39;p5-canvas&#39;);
+            p.angleMode(p.RADIANS);
+        }
+
+        p.draw = function() {
+            p.background(30);
+            drawAxe();
+        }
+
+        function drawAxe() {
+            // Center point for swinging
+            let pivotX = p.width / 2;
+            let pivotY = p.height / 4;
+
+            // Calculate axe position based on angle
+            let axeLength = 200;
+            let axeX = pivotX + axeLength * p.sin(angle);
+            let axeY = pivotY + axeLength * p.cos(angle);
+
+            // Update angle for swinging motion
+            angle += angleSpeed;
+
+            // Draw axe handle
+            p.stroke(139, 69, 19); // brown color for handle
+           p. strokeWeight(10);
+            p.line(pivotX, pivotY, axeX, axeY);
+
+            // Draw axe blade
+            p.noStroke();
+            p.fill(150); // gray color for blade
+            p.push();
+           p. translate(axeX, axeY);
+           p. rotate(angle + p.PI / 2);
+           p. rect(-20, 0, 40, 60);
+            p.pop();
+        }
+
+        return;
+    }
+    
+new p5(setupP5);
+
+})();
+&lt;/script&gt;
 (live: 5s)[(goto: &quot;Died&quot;)]</tw-passagedata><tw-passagedata pid="11" name="right statue" tags="" position="1075,675" size="100,100">The room is full of gold which you quickly begin to stuff into your pockets. Now, do you [[abscond with your gold-&gt;leave]] or [[go back-&gt;bookshelf]] and continue to look for more gold?</tw-passagedata><tw-passagedata pid="12" name="Died" tags="" position="550,950" size="100,100">You have met an untimely end.</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
