@@ -40,4 +40,4 @@
     }
   }
   new setupP5(setupP5);
-})
+});
