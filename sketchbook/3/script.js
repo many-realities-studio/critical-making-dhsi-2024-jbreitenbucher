@@ -39,4 +39,4 @@
     }
     return;
   }
-  new p5(setupP5);
+  new P5(setupP5);
