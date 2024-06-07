@@ -1,4 +1,3 @@
-(function () {
   function setupP5(p) {
     p.setup = function () {
       let canvas = p.createCanvas(400, 400);
@@ -38,10 +37,6 @@
       p.fill(255, 200, 0, 200);
       p.ellipse(flameX, flameY, flameSize / 2, flameSize);
     }
-
     return;
   }
-
-  new P5(setupP5);
-
-})();
+  new p5(setupP5);
