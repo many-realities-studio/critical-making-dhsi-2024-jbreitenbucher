@@ -1,5 +1,5 @@
  p=this;
- function setupP5(p){
+ //function setupP5(p){
     p.setup = function() {
       let canvas = p.createCanvas(400, 400);
       canvas.parent('p5-canvas-hall');
@@ -39,4 +39,4 @@
       p.ellipse(flameX, flameY, flameSize / 2, flameSize);
     }
   }
-  new setupP5(setupP5);
+ // new setupP5(setupP5);
