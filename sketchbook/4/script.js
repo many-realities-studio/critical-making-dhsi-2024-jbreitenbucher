@@ -1,5 +1,5 @@
-(function(){
-  function setupP5(p){
+ p=this;
+ function setupP5(p){
     p.setup = function() {
       let canvas = p.createCanvas(400, 400);
       canvas.parent('p5-canvas-hall');
@@ -40,4 +40,3 @@
     }
   }
   new setupP5(setupP5);
-});
