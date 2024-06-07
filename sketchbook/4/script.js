@@ -32,7 +32,7 @@
       let flameSize = 30 + p.random(-5, 5);
 
       p.noStroke();
-      p.candleYfill(255, 140, 0, 150);
+      candleYfill(255, 140, 0, 150);
       p.ellipse(flameX, flameY, flameSize, flameSize * 2);
 
       p.fill(255, 200, 0, 200);
